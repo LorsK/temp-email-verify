@@ -305,9 +305,10 @@
         })
         .then(response => {
           if (response.status !== 200) {
-            console.log(status);
-            throw 'invalid code';
+            console.log(response);
+            // throw 'invalid code';
           }
+          console.log(response);
           console.log('Success:', response.json);
           document.getElementById(
             'confirmed_text'
