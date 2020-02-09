@@ -301,6 +301,7 @@
       fetch(url, {
         method: 'POST',
         'content-type': 'application/json',
+        mode: 'no-cors',
         body: {
           userId: uid,
           authorizationCode: code
