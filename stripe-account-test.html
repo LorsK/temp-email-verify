@@ -300,11 +300,11 @@
       var url = `https://157644f1.ngrok.io/v1/payments/stripe/oauth/`;
       fetch(url, {
         method: 'POST',
-        headers: { 'Content-type': 'Application/json' },
+        headers: new Headers({ 'Content-type': 'Application/json' }),
         body: JSON.stringify({
           userId: uid,
           authorizationCode: code
-        }) // or 'PUT'
+        })
       })
         .then(async res => {
           return res.json();
