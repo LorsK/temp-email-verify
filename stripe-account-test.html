@@ -292,24 +292,28 @@
     }
     const token = getUrlVars()['token'];
     const code = getUrlVars()['code'];
+    const uid = getUrlVars()['state'];
 
     console.log(token, code);
 
     if (code) {
-      var url = `https://ancient-hollows-74113.herokuapp.com/https://69408547.ngrok.io/v1/payments/stripe/authorizeExpressAccount/${code}`;
+      var url = `https://ancient-hollows-74113.herokuapp.com/https://api.hiride.ca/v1/payments/stripe/authorizeExpressAccount/`;
       fetch(url, {
-        method: 'GET' // or 'PUT'
+        method: 'POST',
+        body: {
+          userId: uid,
+          authorizationCode: code
+        } // or 'PUT'
       })
         .then(async res => {
           return res.json();
         })
         .then(response => {
-          if (response.status !== 200) {
+          if (!response.status > 200) {
             console.log(response);
-            // throw 'invalid code';
+            throw 'invalid code';
           }
-          console.log(response);
-          console.log('Success:', response.json);
+          console.log('Success:', response);
           document.getElementById(
             'confirmed_text'
           ).innerHTML = `Verified <span style="color: #A4A4A4"> ${response.json.schoolEmailAddress} </span>! Your school will now show on your profile.`;
@@ -326,7 +330,7 @@
     } else {
       document.getElementById(
         'confirmed_text'
-      ).innerHTML = `Sorry, this link is invalid`;
+      ).innerHTML = `You have canceled creating your payout account with Stripe. Please click back and try again.`;
     }
   </script>
 </html>
