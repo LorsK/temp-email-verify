@@ -294,16 +294,13 @@
     const code = getUrlVars()['code'];
     const uid = getUrlVars()['state'];
 
-    console.log(token, code);
+    console.log(token, code, uid);
 
     if (code) {
       var url = `https://157644f1.ngrok.io/v1/payments/stripe/oauth/`;
       fetch(url, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: new Headers({
-          'Content-type': 'Application/json'
-        }),
+        headers: { 'Content-type': 'Application/json' },
         body: JSON.stringify({
           userId: uid,
           authorizationCode: code
