@@ -297,9 +297,10 @@
     console.log(token, code);
 
     if (code) {
-      var url = `https://ancient-hollows-74113.herokuapp.com/https://api.hiride.ca/v1/payments/stripe/authorizeExpressAccount/`;
+      var url = `https://api.hiride.ca/v1/payments/stripe/authorizeExpressAccount/`;
       fetch(url, {
         method: 'POST',
+        'content-type': 'application/json',
         body: {
           userId: uid,
           authorizationCode: code
