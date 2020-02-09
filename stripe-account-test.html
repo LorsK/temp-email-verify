@@ -300,13 +300,15 @@
       var url = `https://api.hiride.ca/v1/payments/stripe/authorizeExpressAccount/`;
       fetch(url, {
         method: 'POST',
-        'Content-Type': 'application/json',
-        Origin: 'https://example.hiride.ca',
         mode: 'no-cors',
-        body: {
+        headers: new Headers({
+          'content-type': 'application/json',
+          Origin: 'https://example.hiride.ca'
+        }),
+        body: JSON.stringify({
           userId: uid,
           authorizationCode: code
-        } // or 'PUT'
+        }) // or 'PUT'
       })
         .then(async res => {
           return res.json();
