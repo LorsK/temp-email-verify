@@ -315,7 +315,9 @@
           if (res.status > 200) {
             throw 'Something went wrong';
           }
-
+          var searchParams = new URLSearchParams(window.location.search);
+          searchParams.set('success', 'true');
+          window.location.search = searchParams.toString();
           console.log('Success:', res);
           document.getElementById(
             'confirmed_text'
@@ -327,6 +329,9 @@
           return res;
         })
         .catch(error => {
+          var searchParams = new URLSearchParams(window.location.search);
+          searchParams.set('error', 'true');
+          window.location.search = searchParams.toString();
           console.error('Error:', error);
           document.getElementById(
             'confirmed_text'
