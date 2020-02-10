@@ -23,8 +23,6 @@
 
           const sessionId = getUrlVars()['sessionId'];
 
-          console.log(token, code, uid);
-
           stripe
             .redirectToCheckout({
               //   items: [{ sku: 'sku_GdhGb5HKW3HiLP', quantity: 1 }],
