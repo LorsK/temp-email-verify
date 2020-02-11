@@ -305,6 +305,12 @@
       ).innerHTML = `<img src="https://firebasestorage.googleapis.com/v0/b/hiride-rn.appspot.com/o/verified.png?alt=media&token=87f7c01e-dffa-4ddd-a28c-03d1f9452f3d" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">`;
     }
 
+    if (error) {
+      document.getElementById(
+            'confirmed_text'
+          ).innerHTML = `Oops! Seems like the verification link is invalid or has expired! Click Back and try again.`;
+    }
+
     if (code && !success && !error) {
       var url = `http://hiride-api-dev.us-east-2.elasticbeanstalk.com/v1/payments/stripe/express/oauth/`;
       fetch(url, {
