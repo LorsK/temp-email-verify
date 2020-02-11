@@ -294,7 +294,7 @@
     const code = getUrlVars()['code'];
     const uid = getUrlVars()['state'];
     const success = getUrlVars()['success'];
-    const error = getUrlVars()['success'];
+    const error = getUrlVars()['error'];
 
     if (success) {
       document.getElementById(
@@ -306,7 +306,7 @@
     }
 
     if (code && !success && !error) {
-      var url = `https://hiride-api-dev.us-east-2.elasticbeanstalk.com/v1/payments/stripe/express/oauth/`;
+      var url = `http://hiride-api-dev.us-east-2.elasticbeanstalk.com/v1/payments/stripe/express/oauth/`;
       fetch(url, {
         method: 'POST',
         mode: 'cors',
