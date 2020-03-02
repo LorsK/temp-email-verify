@@ -281,6 +281,7 @@
   </body>
   <script language="javascript" type="text/javascript">
     const token = window.location.search.substr(1).split('=')[1];
+    console.log(token);
 
     if (window.location.search.substr(1).split('=')[0] === 'token') {
       var url = `https://ancient-hollows-74113.herokuapp.com/http://localhost:3000/v1/sendgrid/confirmation/${token}`;
@@ -288,6 +289,7 @@
         method: 'GET' // or 'PUT'
       })
         .then(async res => {
+          console.log(res);
           return res.json();
         })
         .then(response => {
