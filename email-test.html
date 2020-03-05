@@ -281,7 +281,6 @@
   </body>
   <script language="javascript" type="text/javascript">
     const token = window.location.search.substr(1).split('=')[1];
-    console.log(token);
 
     if (window.location.search.substr(1).split('=')[0] === 'token') {
       var url = `http://localhost:3000/v1/sendgrid/confirmation/${token}`;
@@ -296,10 +295,10 @@
           return res.json();
         })
         .then(response => {
-          console.log('Success:', response.json);
+          console.log('Success:', response);
           document.getElementById(
             'confirmed_text'
-          ).innerHTML = `Verified <span style="color: #A4A4A4"> ${response.json.schoolEmailAddress} </span>! Your school will now show on your profile.`;
+          ).innerHTML = `Verified <span style="color: #A4A4A4"> ${response.schoolEmailAddress} </span>! Your school will now show on your profile.`;
           document.getElementById(
             'verified_image'
           ).innerHTML = `<img src="https://firebasestorage.googleapis.com/v0/b/hiride-rn.appspot.com/o/verified.png?alt=media&token=87f7c01e-dffa-4ddd-a28c-03d1f9452f3d" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">`;
