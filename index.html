@@ -98,7 +98,16 @@
     <!-- start preheader -->
     <div
       class="preheader"
-      style="display: none; max-width: 0; max-height: 0; overflow: hidden; font-size: 1px; line-height: 1px; color: #fff; opacity: 0;"
+      style="
+        display: none;
+        max-width: 0;
+        max-height: 0;
+        overflow: hidden;
+        font-size: 1px;
+        line-height: 1px;
+        color: #fff;
+        opacity: 0;
+      "
     >
       A preheader is the short summary text that follows the subject line when
       an email is viewed in the inbox.
@@ -125,16 +134,21 @@
             <tr>
               <td align="center" valign="top" style="padding: 36px 24px;">
                 <a
-                  href="https://hiride.ca"
+                  href="https://tracescan.ca"
                   target="_blank"
                   style="display: inline-block;"
                 >
                   <img
-                    src="https://firebasestorage.googleapis.com/v0/b/hiride-rn.appspot.com/o/hiride-logo-rounded-x2048.png?alt=media&token=f6c0f127-fad8-44ae-84e9-e506bfd0145a"
+                    src="https://firebasestorage.googleapis.com/v0/b/tracescan-app.appspot.com/o/tracescan.png?alt=media&token=4049caed-f0c3-47bd-ba3b-9eb8895cb69f"
                     alt="Logo"
                     border="0"
-                    width="48"
-                    style="display: block; width: 48px; max-width: 48px; min-width: 48px;"
+                    width="250"
+                    style="
+                      display: block;
+                      width: 250px;
+                      max-width: 250px;
+                      min-width: 250px;
+                    "
                   />
                 </a>
               </td>
@@ -169,11 +183,21 @@
               <td
                 align="left"
                 bgcolor="#ffffff"
-                style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 3px solid #d4dadf;"
+                style="
+                  padding: 36px 24px 0;
+                  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+                  border-top: 3px solid #d4dadf;
+                "
               >
                 <h1
                   id="confirmed_text"
-                  style="margin: 0; font-size: 32px; font-weight: 700; letter-spacing: -1px; line-height: 48px;"
+                  style="
+                    margin: 0;
+                    font-size: 32px;
+                    font-weight: 700;
+                    letter-spacing: -1px;
+                    line-height: 48px;
+                  "
                 >
                   Confirming Your Email Address...
                 </h1>
@@ -193,7 +217,11 @@
                 id="verified_image"
                 align="left"
                 bgcolor="#ffffff"
-                style="padding: 36px 24px 0; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; border-top: 0px solid #d4dadf;"
+                style="
+                  padding: 36px 24px 0;
+                  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+                  border-top: 0px solid #d4dadf;
+                "
               >
                 <!-- <img src="https://firebasestorage.googleapis.com/v0/b/hiride-rn.appspot.com/o/hiride-logo-rounded-x2048.png?alt=media&token=f6c0f127-fad8-44ae-84e9-e506bfd0145a" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;"> -->
               </td>
@@ -232,11 +260,17 @@
               <td
                 align="left"
                 bgcolor="#ffffff"
-                style="padding: 24px; font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px; border-bottom: 3px solid #d4dadf"
+                style="
+                  padding: 24px;
+                  font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+                  font-size: 16px;
+                  line-height: 24px;
+                  border-bottom: 3px solid #d4dadf;
+                "
               >
                 <p style="margin: 0;">
                   With Love,<br />
-                  The HiRide Team
+                  The TraceScan Team
                 </p>
               </td>
             </tr>
@@ -283,27 +317,32 @@
     const token = window.location.search.substr(1).split('=')[1];
 
     if (window.location.search.substr(1).split('=')[0] === 'token') {
-      var url = `https://api.hiride.ca/v1/sendgrid/confirmation/${token}`;
+      var url = `https://us-central1-tracescan-app.cloudfunctions.net/verifyEmail`;
       fetch(url, {
-        method: 'GET' // or 'PUT'
+        method: 'POST', // or 'PUT'
+        body: {
+          data: {
+            token,
+          },
+        },
       })
-        .then(async res => {
+        .then(async (res) => {
           if (res.status !== 200) {
             throw 'invalid token';
           }
 
           return res.json();
         })
-        .then(response => {
+        .then((response) => {
           console.log('Success:', response);
           document.getElementById(
             'confirmed_text'
-          ).innerHTML = `Verified <span style="color: #A4A4A4"> ${response.schoolEmailAddress} </span>! Your school will now show on your profile.`;
+          ).innerHTML = `Verified <span style="color: #A4A4A4"> ${response.emailAddress} </span>!`;
           document.getElementById(
             'verified_image'
           ).innerHTML = `<img src="https://firebasestorage.googleapis.com/v0/b/hiride-rn.appspot.com/o/verified.png?alt=media&token=87f7c01e-dffa-4ddd-a28c-03d1f9452f3d" alt="Logo" border="0" width="48" style="display: block; width: 48px; max-width: 48px; min-width: 48px;">`;
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error:', error);
           document.getElementById(
             'confirmed_text'
