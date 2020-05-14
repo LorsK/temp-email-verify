@@ -320,11 +320,15 @@
       var url = `https://us-central1-tracescan-app.cloudfunctions.net/verifyEmail`;
       fetch(url, {
         method: 'POST', // or 'PUT'
-        body: {
+        headers: {
+          'Content-Type': 'application/json',
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
           data: {
             token,
           },
-        },
+        }),
       })
         .then(async (res) => {
           // if (res.status !== 200) {
